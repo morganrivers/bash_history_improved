@@ -101,3 +101,5 @@ Additionally, if the system shuts down unexpectedly (e.g. power loss), the scrip
 ## Conclusion
 
 With this simple script and Systemd service file, you can ensure that your Bash history is automatically backed up and restored on startup, helping you keep track of all the commands you've typed on your Linux system.
+
+(not sure what the convention is for attribution these days, but most boilerplate code (obviously) written by gpt4)
