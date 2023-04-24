@@ -51,7 +51,7 @@ sudo bash_history_backup.sh restore
 After setting this up, you can test it works with this script (all tests should pass): 
 
 ```
-.test_history_functionality.sh
+./test_history_functionality.sh
 ```
 
 ## Limitations
