@@ -1,5 +1,5 @@
 # bash_history_improved
-This is my configuration so that bash history actually works! Infinite number of line storage, test to see everything is set up correctly, does not occasionally delete back to 500 lines.
+This is my configuration so that bash history actually works! Infinite number of line storage, test to see everything is set up correctly, does not occasionally delete back to 500 lines. Fuzzy search integration (option to search all history ever, not just what you have in your terminal at the moment).
 
 My system that this works on:
 Linux 5.10.0-14-amd64 #1 SMP Debian 5.10.113-1 (2022-04-29) x86_64 GNU/Linux
@@ -77,7 +77,7 @@ function allhistfun(){
 bind '"\C-u": "allhistfun\n"'
 ```
 
-That way, control+u will search all the bash history, not just the local history which you get with control+r by default in fzf.
+That way, control+u will search all the bash history, not just the history in the terminal which you have open at the time (this is what you typically get with "history" command or with control+r by default in fzf).
 
 ## Limitations
 
