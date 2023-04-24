@@ -1,0 +1,11 @@
+[Unit]
+Description=Backup bash history before shutdown
+
+[Service]
+Type=oneshot
+RemainAfterExit=true
+ExecStart=/bin/true
+ExecStop=/usr/local/bin/bash_history_backup.sh backup
+
+[Install]
+WantedBy=multi-user.target
