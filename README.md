@@ -46,6 +46,13 @@ To restore your Bash history, run:
 ```
 sudo bash_history_backup.sh restore
 ```
+## Testing
+
+After setting this up, you can test it works with this script (all tests should pass): 
+
+```
+.test_history_functionality.sh
+```
 
 ## Limitations
 
