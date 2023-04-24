@@ -30,6 +30,15 @@ bash_history_backup.service
 sudo systemctl enable bash_history_backup.service
 sudo systemctl start bash_history_backup.service
 ```
+4. Add to end of your bashrc:
+
+```
+export HISTFILESIZE=
+export HISTSIZE=
+shopt -s histappend
+PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
+bash_history_backup.sh restore
+```
 
 ## Usage
 
@@ -53,6 +62,22 @@ After setting this up, you can test it works with this script (all tests should 
 ```
 ./test_history_functionality.sh
 ```
+
+## Optional Additional Configuration with fuzzy search package
+If you have fuzzy search installed, you can add this to your bashrc:
+
+```
+function allhistfun(){
+    result=`echo $(tac ~/.bash_history| grep -v '^#[0-9]\+' | fzf --no-sort --exact )`
+    echo $result
+    eval $result
+    history -s $result
+}
+
+bind '"\C-u": "allhistfun\n"'
+```
+
+That way, control+u will search all the bash history, not just the local history which you get with control+r by default in fzf.
 
 ## Limitations
 
