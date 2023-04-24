@@ -55,6 +55,10 @@ To restore your Bash history, run:
 ```
 sudo bash_history_backup.sh restore
 ```
+
+... but actually both do the same thing :) sorry if that's confusing ...
+They're always looking for the longest of the backup or the bash history and rewrite the shorter one with the longer one. 
+
 ## Testing
 
 After setting this up, you can test it works with this script (all tests should pass): 
