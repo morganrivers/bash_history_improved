@@ -7,6 +7,14 @@ Linux 5.10.0-14-amd64 #1 SMP Debian 5.10.113-1 (2022-04-29) x86_64 GNU/Linux
 
 Underlying this is a simple script to automatically backup your Bash history to a file before shutdown and restore it when you start up again. Again, the script is intended for use on Debian-based Linux distributions.
 
+You can check if a Linux system is using `systemd` by running the following command in the terminal:
+
+```
+systemctl
+```
+
+If `systemd` is installed and running, you should see a list of units and their current status. If the command is not found, it may indicate that `systemd` is not installed or not being used on the system.
+
 ## Requirements
 
 - Bash shell
