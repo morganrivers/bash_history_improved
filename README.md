@@ -5,10 +5,7 @@ My system that this works on:
 Linux 5.10.0-14-amd64 #1 SMP Debian 5.10.113-1 (2022-04-29) x86_64 GNU/Linux
 
 
-
-# Bash History Backup
-
-This is a simple script to automatically backup your Bash history to a file before shutdown and restore it when you start up again. The script is intended for use on Debian-based Linux distributions.
+Underlying this is a simple script to automatically backup your Bash history to a file before shutdown and restore it when you start up again. Again, the script is intended for use on Debian-based Linux distributions.
 
 ## Requirements
 
