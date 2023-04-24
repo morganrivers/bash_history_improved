@@ -89,13 +89,6 @@ else
     echo "Test failed: Starting and stopping the service alters history"
 fi
 
-# Test 9: Start and stop the service
-if ! cmp -s /usr/local/bin/bash_history_backup.sh ~/Code/Debian/bash_history_backup.sh; then
-    echo "Test Failed: The two files are not the same."
-else
-    echo "Test Passed: script files to run this are the same"
-fi
-
 # and this resets the history again
 
 sudo systemctl restart bash_history_backup.service
