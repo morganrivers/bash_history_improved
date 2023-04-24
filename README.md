@@ -26,7 +26,7 @@ If `systemd` is installed and running, you should see a list of units and their 
 1. Download the `bash_history_backup.sh` file and place it in `/usr/local/bin/`:
 
 ```
-sudo curl https://raw.githubusercontent.com/morganrivers/repo/main/bash_history_backup.sh -o /usr/local/bin/bash_history_backup.sh
+sudo curl https://raw.githubusercontent.com/morganrivers/bash_history_improved/main/bash_history_backup.sh -o /usr/local/bin/bash_history_backup.sh
 sudo chmod +x /usr/local/bin/bash_history_backup.sh
 ```
 
@@ -47,6 +47,12 @@ export HISTSIZE=
 shopt -s histappend
 PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
 bash_history_backup.sh restore
+```
+
+5. finally, in ~, create an empty .bash_history_backup file:
+
+```
+touch ~/.bash_history_backup
 ```
 
 ## Usage
