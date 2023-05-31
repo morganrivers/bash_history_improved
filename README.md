@@ -23,11 +23,13 @@ If `systemd` is installed and running, you should see a list of units and their 
 
 ## Installation
 
-1. Download the `bash_history_backup.sh` file and place it in `/usr/local/bin/`:
+1. Download the `bash_history_backup.sh` and `backup_history_every_5_minutes.sh` file and place them in `/usr/local/bin/`:
 
 ```
 sudo curl https://raw.githubusercontent.com/morganrivers/bash_history_improved/main/bash_history_backup.sh -o /usr/local/bin/bash_history_backup.sh
+sudo curl https://raw.githubusercontent.com/morganrivers/bash_history_improved/main/backup_history_every_5_minutes.sh -o /usr/local/bin/backup_history_every_5_minutes.sh
 sudo chmod +x /usr/local/bin/bash_history_backup.sh
+sudo chmod +x /usr/local/bin/backup_history_every_5_minutes.sh
 ```
 
 2. Create a Systemd service file named `bash_history_backup.service` in `/etc/systemd/system/` with the content from
@@ -54,9 +56,9 @@ bash_history_backup.sh restore
 ```
 touch ~/.bash_history_backup
 ```
-6. Run the following script to let crontab backs up the history every 5 minutes. Helps prevent issues with unexpected shutdown.
+6. You can now run the following script to let crontab backs up the history every 5 minutes. Helps prevent issues with unexpected shutdown.
 ```
-./backup_history_every_5_minutes.sh
+backup_history_every_5_minutes.sh
 ```
 
 ## Usage
@@ -91,6 +93,7 @@ If you have fuzzy search installed, you can add this to your bashrc:
 
 ```
 function allhistfun(){
+    history -a
     result=`echo $(tac ~/.bash_history| grep -v '^#[0-9]\+' | fzf --no-sort --exact )`
     echo $result
     eval $result
