@@ -6,7 +6,7 @@ backup_file="$HOME/.bash_history_backup"
 case "$1" in
     backup|restore)
         if [ -f "$backup_file" ]; then
-            current_history_lines=$(wc -l < "$backup_script_location/.bash_history")
+            current_history_lines=$(wc -l < "$HOME/.bash_history")
             backup_history_lines=$(wc -l < "$backup_file")
 	    
 	    # uncomment to see line number counts if it pleases you
@@ -16,12 +16,12 @@ case "$1" in
             #echo $backup_history_lines
 
             if [ "$backup_history_lines" -gt "$current_history_lines" ]; then
-                cp "$backup_file" "$backup_script_location/.bash_history"
+                cp "$backup_file" "$HOME/.bash_history"
             elif [ "$current_history_lines" -gt "$backup_history_lines" ]; then
-                cp "$backup_script_location/.bash_history" "$backup_file"
+                cp "$HOME/.bash_history" "$backup_file"
             fi
         else
-            cp "$backup_script_location/.bash_history" "$backup_file"
+            cp "$HOME/.bash_history" "$backup_file"
         fi
         ;;
     *)
@@ -29,3 +29,4 @@ case "$1" in
         exit 1
         ;;
 esac
+
