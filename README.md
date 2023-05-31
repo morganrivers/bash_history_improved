@@ -88,6 +88,19 @@ After setting this up, you can test it works with this script (all tests should 
 ./test_history_functionality.sh
 ```
 
+## Testing in a docker container
+
+You can also check it works in a docker container (note: won't do the systemd things):
+
+```
+sudo docker build -t debian-bash-history:latest -f debian-bash-history .
+sudo docker run -it debian-bash-history
+```
+then in the container
+```
+./test_history_functionality.sh
+```
+
 ## Optional Additional Configuration with fuzzy search package
 If you have fuzzy search installed, you can add this to your bashrc:
 
