@@ -74,9 +74,8 @@ $main_script_path restore
 assert_history_length 80
 
 
-
-# Test 8: Start and stop the service only if systemd is available
-if systemctl >/dev/null 2>&1; then
+# Test 8: Start and stop the service only if systemd is running
+if [ "$(cat /proc/1/comm)" == "systemd" ]; then
     sudo systemctl restart bash_history_backup.service
     sudo systemctl stop bash_history_backup.service
 
@@ -91,8 +90,9 @@ if systemctl >/dev/null 2>&1; then
 
     # reset the history
     sudo systemctl restart bash_history_backup.service
+    cp ~/.bash_history_backup_BEFORE_TEST ~/.bash_history_backup
 else
-    echo "systemd is not available, skipping service tests"
+    echo "systemd is not running as PID 1, skipping service tests"
 fi
 
 cp ~/.bash_history_backup_BEFORE_TEST ~/.bash_history_backup
