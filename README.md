@@ -54,6 +54,10 @@ bash_history_backup.sh restore
 ```
 touch ~/.bash_history_backup
 ```
+6. Run the following script to let crontab backs up the history every 5 minutes. Helps prevent issues with unexpected shutdown.
+```
+./backup_history_every_5_minutes.sh
+```
 
 ## Usage
 
