@@ -75,23 +75,26 @@ assert_history_length 80
 
 
 
+# Test 8: Start and stop the service only if systemd is available
+if systemctl >/dev/null 2>&1; then
+    sudo systemctl restart bash_history_backup.service
+    sudo systemctl stop bash_history_backup.service
 
-# Test 8: Start and stop the service
-sudo systemctl restart bash_history_backup.service
-sudo systemctl stop bash_history_backup.service
+    current_history_lines=$(wc -l < ~/.bash_history)
+    backup_history_lines=$(wc -l < ~/.bash_history_backup)
 
-current_history_lines=$(wc -l < ~/.bash_history)
-backup_history_lines=$(wc -l < ~/.bash_history_backup)
+    if [ "$backup_history_lines" -eq "$current_history_lines" ]; then
+        echo "Test passed: Starting and stopping the service preserves history"
+    else
+        echo "Test failed: Starting and stopping the service alters history"
+    fi
 
-if [ "$backup_history_lines" -eq "$current_history_lines" ]; then
-    echo "Test passed: Starting and stopping the service preserves history"
+    # reset the history
+    sudo systemctl restart bash_history_backup.service
 else
-    echo "Test failed: Starting and stopping the service alters history"
+    echo "systemd is not available, skipping service tests"
 fi
 
-# and this resets the history again
-
-sudo systemctl restart bash_history_backup.service
 cp ~/.bash_history_backup_BEFORE_TEST ~/.bash_history_backup
 
 
