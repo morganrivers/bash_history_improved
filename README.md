@@ -90,9 +90,10 @@ After setting this up, you can test it works with this script (all tests should 
 
 ## Testing in a docker container
 
-You can also check it works in a docker container (note: won't do the systemd things):
+You can also check it works in a docker container named debian-bash-history (note: won't do the systemd things):
 
 ```
+sudo curl https://raw.githubusercontent.com/morganrivers/bash_history_improved/main/bash_history_backup.sh > debian-bash-history
 sudo docker build -t debian-bash-history:latest -f debian-bash-history .
 sudo docker run -it debian-bash-history
 ```
