@@ -106,15 +106,19 @@ then in the container
 If you have fuzzy search installed, you can add this to your bashrc:
 
 ```
-function allhistfun(){
+function search_all_history(){
     history -a
-    result=`echo $(tac ~/.bash_history| grep -v '^#[0-9]\+' | fzf --no-sort --exact )`
+    result=`echo $(tac ~/.bash_history | awk '!x[$0]++'| grep -v '^#[0-9]\+' |  fzf --no-sort --exact )`
+    # tac: reverse order of cat! (displays the file)
+    # awk '!x[$0]++' : remove duplicates
+    # grep -v '^#[0-9]\+' : include only the lines that don't start with #[number]
+    # fzf --no-sort --exact: nice interactive fuzzy search interface of results
     echo $result
     eval $result
     history -s $result
 }
 
-bind '"\C-u": "allhistfun\n"'
+bind '"\C-u": "search_all_history\n"'
 ```
 
 That way, control+u will search all the bash history, not just the history in the terminal which you have open at the time (this is what you typically get with "history" command or with control+r by default in fzf).
