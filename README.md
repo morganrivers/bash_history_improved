@@ -5,7 +5,7 @@ My system that this works on:
 Linux 5.10.0-14-amd64 #1 SMP Debian 5.10.113-1 (2022-04-29) x86_64 GNU/Linux
 
 
-Underlying this is a simple script to automatically backup your Bash history to a file before shutdown and restore it when you start up again. Again, the script is intended for use on Debian-based Linux distributions.
+Underlying this is a simple script to automatically backup your Bash history to a file before shutdown and restore it when you start up again. Again, the script is intended for use on Debian-based Linux distributions. Might work fine on ubuntu or arch / similiar, but has not been tested.
 
 ## Requirements
 
@@ -124,10 +124,9 @@ bind '"\C-u": "search_all_history\n"'
 That way, control+u will search all the bash history, not just the history in the terminal which you have open at the time (this is what you typically get with "history" command or with control+r by default in fzf).
 
 ## Limitations
+If the system shuts down unexpectedly (e.g. power loss), the script will not be able to backup your Bash history since before the backup was run with crontab, and so the restored history file may not include commands typed in the last minute or two.
 
-The script only backs up your Bash history file, so any customizations to your history settings or commands typed in the current session will not be saved.
-
-Additionally, if the system shuts down unexpectedly (e.g. power loss), the script will not be able to backup your Bash history and the restored history file may not include commands typed in the last session.
+Also as you can see, it's a bit hacky. It probably only works on debian, ubuntu, and maybe arch. But it has only been tested in Debian. Let me know if it works in these other operating systems!
 
 ## Conclusion
 
