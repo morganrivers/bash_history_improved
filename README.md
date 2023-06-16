@@ -108,9 +108,12 @@ If you have fuzzy search installed, you can add this to your bashrc:
 ```
 function search_all_history(){
     history -a
-    result=`echo $(tac ~/.bash_history | awk '!x[$0]++'| grep -v '^#[0-9]\+' |  fzf --no-sort --exact )`
+    result=$(tac ~/.bash_history | perl -ne '$seen{$_}++ and next or print' | fzf --no-sort --exact)
     # tac: reverse order of cat! (displays the file)
-    # awk '!x[$0]++' : remove duplicates
+    # perl -ne '$seen{$_}++ and next or print': remove duplicates
+        -ne: This tells perl to read the input line by line and apply the script provided to each line.
+        $seen{$_}++: This increments the value in the seen hash for the key $_ (which represents the current line). If the line has been seen before, this value will be greater than 1.
+        and next or print: This is a conditional statement. If the line has been seen before ($seen{$_}++ is true), it moves to the next line (next). If the line hasn't been seen before, it prints the line (print).
     # grep -v '^#[0-9]\+' : include only the lines that don't start with #[number]
     # fzf --no-sort --exact: nice interactive fuzzy search interface of results
     echo $result
