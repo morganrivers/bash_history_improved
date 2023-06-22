@@ -28,8 +28,10 @@ If `systemd` is installed and running, you should see a list of units and their 
 ```
 sudo curl https://raw.githubusercontent.com/morganrivers/bash_history_improved/main/bash_history_backup.sh -o /usr/local/bin/bash_history_backup.sh
 sudo curl https://raw.githubusercontent.com/morganrivers/bash_history_improved/main/backup_history_every_5_minutes.sh -o /usr/local/bin/backup_history_every_5_minutes.sh
+sudo curl https://raw.githubusercontent.com/morganrivers/bash_history_improved/main/test_history_functionality.sh -o /usr/local/bin/test_history_functionality.sh
 sudo chmod +x /usr/local/bin/bash_history_backup.sh
 sudo chmod +x /usr/local/bin/backup_history_every_5_minutes.sh
+sudo chmod +x /usr/local/bin/test_history_functionality.sh
 ```
 
 2. I suggest backing up history at both startup and shutdown. To do this, create a Systemd service file named `bash_history_backup.service` in `/etc/systemd/system/` with the content from
@@ -96,6 +98,15 @@ I suggest also running `crontab -e` to ensure the crontab has the following line
 ```
 and then save the file.
 
+
+## Testing
+
+After setting this up, you can test it works with this script (all tests should pass): 
+
+```
+test_history_functionality.sh
+```
+
 ## Usage
 
 The `bash_history_backup.sh` script has two modes: `backup` and `restore`.
@@ -115,13 +126,6 @@ sudo bash_history_backup.sh restore
 ... but actually both do the same thing :) sorry if that's confusing ...
 They're always looking for the longest of the backup or the bash history and rewrite the shorter one with the longer one. 
 
-## Testing
-
-After setting this up, you can test it works with this script (all tests should pass): 
-
-```
-./test_history_functionality.sh
-```
 
 ## Testing in a docker container
 
@@ -134,10 +138,12 @@ sudo docker run -it debian-bash-history
 ```
 then in the container
 ```
-./test_history_functionality.sh
+test_history_functionality.sh
 ```
 
 ## Optional Additional Configuration with fuzzy search package
+
+
 If you have fuzzy search installed, you can add this to your bashrc:
 
 ```
