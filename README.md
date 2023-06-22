@@ -32,7 +32,7 @@ sudo chmod +x /usr/local/bin/bash_history_backup.sh
 sudo chmod +x /usr/local/bin/backup_history_every_5_minutes.sh
 ```
 
-2. Create a Systemd service file named `bash_history_backup.service` in `/etc/systemd/system/` with the content from
+2. I suggest backing up history at both startup and shutdown. To do this, create a Systemd service file named `bash_history_backup.service` in `/etc/systemd/system/` with the content from
 bash_history_backup.service. You can use a command line text editor such as `nano` or `vim` to create the service file. Here, I'll use `nano`.
 
 ```bash
