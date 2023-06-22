@@ -89,6 +89,12 @@ touch ~/.bash_history_backup
 ```
 backup_history_every_5_minutes.sh
 ```
+This should print out `cron job added`.
+I suggest also running `crontab -e` to ensure the crontab has the following line in it:
+```
+*/5 * * * * /usr/local/bin/bash_history_backup.sh backup
+```
+and then save the file.
 
 ## Usage
 
