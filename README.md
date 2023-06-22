@@ -33,15 +33,43 @@ sudo chmod +x /usr/local/bin/backup_history_every_5_minutes.sh
 ```
 
 2. Create a Systemd service file named `bash_history_backup.service` in `/etc/systemd/system/` with the content from
-bash_history_backup.service
+bash_history_backup.service. You can use a command line text editor such as `nano` or `vim` to create the service file. Here, I'll use `nano`.
 
-3. Enable and start the `bash_history_backup` service:
+```bash
+sudo nano /etc/systemd/system/bash_history_backup.service
+```
+
+3. Paste the following content into the opened file:
+
+Note that you need to replace `YourUserName` with your actual username!
+
+```ini
+[Unit]
+Description=Bash History Backup
+
+[Service]
+ExecStart=/usr/local/bin/bash_history_backup.sh
+ExecStop=/usr/local/bin/bash_history_backup.sh
+User=YourUserName
+
+[Install]
+WantedBy=multi-user.target
+```
+
+This service configuration will start the bash_history_backup.sh script at system boot and execute it again at system shutdown.
+
+4. Press `CTRL+O` to write out the file. Confirm the filename by pressing `Enter`. Press `CTRL+X` to exit the text editor.
+
+
+
+5. Enable and start the `bash_history_backup` service:
 
 ```
 sudo systemctl enable bash_history_backup.service
 sudo systemctl start bash_history_backup.service
 ```
-4. Add to end of your bashrc:
+
+6. Add to end of your bashrc:
 
 ```
 export HISTFILESIZE=
@@ -51,12 +79,13 @@ PROMPT_COMMAND="history -a; history -c; history -r; ${PROMPT_COMMAND}"
 bash_history_backup.sh restore
 ```
 
-5. finally, in ~, create an empty .bash_history_backup file:
+7. finally, in ~, create an empty .bash_history_backup file:
 
 ```
 touch ~/.bash_history_backup
 ```
-6. You can now run the following script to let crontab backs up the history every 5 minutes. Helps prevent issues with unexpected shutdown.
+
+8. You can now run the following script to let crontab backs up the history every 5 minutes. Helps prevent issues with unexpected shutdown.
 ```
 backup_history_every_5_minutes.sh
 ```
